@@ -1,0 +1,129 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 800px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#8c564b", "font": {"size": 36}, "id": "magnitude", "label": "magnitude", "level": 0, "shape": "dot", "size": 45, "title": "magnitude (Discrete)"}, {"color": "#8c564b", "font": {"size": 36}, "id": "switch", "label": "switch", "level": 0, "shape": "dot", "size": 45, "title": "switch (Discrete)"}, {"color": "#b3e2cd", "font": {"size": 36}, "id": "garbage_0", "label": "garbage_0", "level": 0, "shape": "dot", "size": 45, "title": "garbage_0 (MixtureGaussian)"}, {"color": "#b3e2cd", "font": {"size": 36}, "id": "garbage_2", "label": "garbage_2", "level": 0, "shape": "dot", "size": 45, "title": "garbage_2 (MixtureGaussian)"}, {"color": "#ce6dbd", "font": {"size": 36}, "id": "depends_on_magnitude", "label": "depends_on_magnitude", "level": 1, "shape": "dot", "size": 45, "title": "depends_on_magnitude (ConditionalMixtureGaussian)"}, {"color": "#ce6dbd", "font": {"size": 36}, "id": "outcome", "label": "outcome", "level": 2, "shape": "dot", "size": 45, "title": "outcome (ConditionalMixtureGaussian)"}, {"color": "#ce6dbd", "font": {"size": 36}, "id": "garbage_1", "label": "garbage_1", "level": 3, "shape": "dot", "size": 45, "title": "garbage_1 (ConditionalMixtureGaussian)"}]);
+        edges = new vis.DataSet([{"arrows": "to", "from": "magnitude", "to": "outcome"}, {"arrows": "to", "from": "magnitude", "to": "depends_on_magnitude"}, {"arrows": "to", "from": "magnitude", "to": "garbage_1"}, {"arrows": "to", "from": "garbage_0", "to": "outcome"}, {"arrows": "to", "from": "garbage_0", "to": "garbage_1"}, {"arrows": "to", "from": "garbage_2", "to": "outcome"}, {"arrows": "to", "from": "garbage_2", "to": "garbage_1"}, {"arrows": "to", "from": "depends_on_magnitude", "to": "outcome"}, {"arrows": "to", "from": "depends_on_magnitude", "to": "garbage_1"}, {"arrows": "to", "from": "outcome", "to": "garbage_1"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "layout": {
+        "hierarchical": {
+            "blockShifting": true,
+            "edgeMinimization": true,
+            "enabled": true,
+            "levelSeparation": 150,
+            "parentCentralization": true,
+            "sortMethod": "hubsize",
+            "treeSpacing": 200
+        },
+        "improvedLayout": true,
+        "randomSeed": 0
+    },
+    "physics": {
+        "enabled": true,
+        "hierarchicalRepulsion": {
+            "centralGravity": 0.5,
+            "damping": 0.09,
+            "nodeDistance": 300,
+            "springConstant": 0.01,
+            "springLength": 100
+        },
+        "solver": "hierarchicalRepulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
