@@ -1,0 +1,4 @@
+[core]
+    remote = remote_storage
+['remote "remote_storage"']
+    url = ../c/Users/mikhail.kulyaskin/Glowbyte/PepsiCo/dvc_remote
