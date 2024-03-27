@@ -1,0 +1,5 @@
+home = C:\Users\mikhail.kulyaskin\AppData\Local\Programs\Python\Python311
+include-system-site-packages = false
+version = 3.11.5
+executable = C:\Users\mikhail.kulyaskin\AppData\Local\Programs\Python\Python311\python.exe
+command = C:\Users\mikhail.kulyaskin\AppData\Local\Programs\Python\Python311\python.exe -m venv C:\Users\mikhail.kulyaskin\Glowbyte\PepsiCo\causal_inference\dvc_training\venv
